@@ -352,10 +352,10 @@
       // 1) CONFIG : mets ici ton équipe
       // photo: chemin relatif (ex: "photos/alice.jpg")
       const PEOPLE = [
-        { id: "Nicolas", name: "Nicolas", role: "Direction", photo: "photos/nicolas.png" },
-        { id: "Céline", name: "Céline", role: "Direction", photo: "photos/celine.png" },
-        { id: "Sandrine", name: "Sandrine", role: "Direction", photo: "photos/sandrine.png" },
-        { id: "Annabelle", name: "Annabelle", role: "Direction", photo: "photos/annabelle.png" },
+        { id: "Nicolas", name: "Nicolas", role: "Direction", photo: "photos/Nicolas.png" },
+        { id: "Céline", name: "Céline", role: "Direction", photo: "photos/Celine.png" },
+        { id: "Sandrine", name: "Sandrine", role: "Direction", photo: "photos/Sandrine.png" },
+        { id: "Annabelle", name: "Annabelle", role: "Direction", photo: "photos/Annabelle.png" },
         { id: "MarieA", name: "Marie", role: "Gestion de projet", photo: "photos/MarieA.png" },
         { id: "MarieB", name: "Marie", role: "Gestion de projet", photo: "photos/MarieB.png" },
         { id: "Margaux", name: "Margaux", role: "Gestion de projet", photo: "photos/Margaux.png" },
@@ -587,12 +587,12 @@
         const target = targetIndexes.length ? targetIndexes[targetIndexes.length - 1] : Math.min(chips.length - 1, 8);
 
         // "tours" complets avant l'arrêt
-        const baseSpins = Math.min(28, chips.length - 1);
+        const baseSpins = Math.min(12, chips.length - 1);
         const finalStop = Math.min(chips.length - 1, baseSpins + target);
 
         // on active successivement
         let delay = 35; // départ rapide
-        let delayGrowth = 1.08; // ralentissement
+        let delayGrowth = 1.12; // ralentissement
 
         for (let i = 0; i <= finalStop; i++) {
           chips.forEach((ch) => ch.classList.remove("active"));
@@ -603,7 +603,7 @@
           current.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
 
           await new Promise((r) => setTimeout(r, delay));
-          delay = Math.min(180, Math.floor(delay * delayGrowth));
+          delay = Math.min(120, Math.floor(delay * delayGrowth));
         }
 
         // résultat
