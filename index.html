@@ -611,6 +611,14 @@
 
         // résultat
         setWinner(winner);
+        
+        // Force la surbrillance sur la chip du gagnant (pour éviter tout décalage visuel)
+        chips.forEach((ch) => ch.classList.remove("active"));
+        const winnerChip = chips.find((ch) => ch.dataset.id === winner.id);
+        if (winnerChip) {
+          winnerChip.classList.add("active");
+          winnerChip.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      }
 
         state.isDrawing = false;
         updateCount();
