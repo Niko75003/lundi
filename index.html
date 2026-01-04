@@ -215,9 +215,13 @@
       }
 
       .big .avatar {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 180px;
         border-radius: 24px;
+        /* Avatar du gagnant : pas de cadre, pas de fond */
+        border: none;
+        background: transparent;
+
       }
 
       .big .name {
@@ -590,12 +594,12 @@
         const target = targetIndexes.length ? targetIndexes[targetIndexes.length - 1] : Math.min(chips.length - 1, 8);
 
         // "tours" complets avant l'arrêt
-        const baseSpins = Math.min(12, chips.length - 1);
+        const baseSpins = Math.min(6, chips.length - 1);
         const finalStop = Math.min(chips.length - 1, baseSpins + target);
 
         // on active successivement
-        let delay = 35; // départ rapide
-        let delayGrowth = 1.12; // ralentissement
+        let delay = 20; // départ rapide
+        let delayGrowth = 1.20; // ralentissement
 
         for (let i = 0; i <= finalStop; i++) {
           chips.forEach((ch) => ch.classList.remove("active"));
@@ -606,7 +610,7 @@
           current.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
 
           await new Promise((r) => setTimeout(r, delay));
-          delay = Math.min(120, Math.floor(delay * delayGrowth));
+          delay = Math.min(100, Math.floor(delay * delayGrowth));
         }
 
         // résultat
