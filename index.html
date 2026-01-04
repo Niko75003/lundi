@@ -1,555 +1,621 @@
 <!doctype html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
-</head>
-<body>
-<p class="p1">&lt;!doctype html&gt;</p>
-<p class="p1">&lt;html lang="fr"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="utf-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Tirage au sort — Réunion du lundi&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>:root{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--bg:#0b1020;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--card:#121a33;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--muted:#8ea0c6;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--text:#eaf0ff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--accent:#5eead4;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--danger:#fb7185;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--border:rgba(255,255,255,.12);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--shadow: 0 10px 30px rgba(0,0,0,.35);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>*{ box-sizing:border-box; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin:0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: radial-gradient(1000px 500px at 20% 0%, rgba(94,234,212,.15), transparent 60%),</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>radial-gradient(800px 500px at 80% 10%, rgba(96,165,250,.15), transparent 60%),</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>var(--bg);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color:var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height:100vh;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items:center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content:center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:24px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.wrap{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width:min(1100px, 100%);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: 420px 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 900px){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.wrap{ grid-template-columns: 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.panel{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background:rgba(18,26,51,.85);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: var(--shadow);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow:hidden;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:16px 16px 12px 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items:flex-start;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content:space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:12px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header h1{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin:0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size:16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing:.2px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header p{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin:6px 0 0 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color:var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size:12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height:1.35;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.actions{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items:center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,.06);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:10px 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor:pointer;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight:600;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: transform .06s ease, background .15s ease, border-color .15s ease;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>user-select:none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>white-space:nowrap;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button:hover{ background: rgba(255,255,255,.10); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button:active{ transform: translateY(1px); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button.primary{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(94,234,212,.15);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-color: rgba(94,234,212,.35);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button.primary:hover{ background: rgba(94,234,212,.22); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button.danger{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(251,113,133,.12);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-color: rgba(251,113,133,.35);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button.danger:hover{ background: rgba(251,113,133,.18); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button:disabled{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity:.55;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor:not-allowed;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform:none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.content{ padding:14px 16px 16px 16px; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.list{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-direction:column;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-height: 62vh;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow:auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding-right:6px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.person{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items:center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,.04);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.avatar{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width:38px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height:38px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>object-fit:cover;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,.06);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex:0 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.name{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight:700;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size:13px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height:1.1;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.meta{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size:12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color:var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top:3px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.grow{ flex:1 1 auto; min-width:0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.toggle{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items:center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex:0 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size:12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color:var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>input[type="checkbox"]{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width:18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height:18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>accent-color: var(--accent);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor:pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stage{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-direction:column;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 280px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.big{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items:center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,.04);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.big .avatar{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width:72px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height:72px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.big .name{ font-size:18px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.big .meta{ font-size:12px; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.ticker{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow:hidden;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,.03);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.chip{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items:center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding:8px 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius:14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,.04);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex:0 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity:.65;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform: scale(.98);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity .12s ease, transform .12s ease, border-color .12s ease;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.chip.active{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity:1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform: scale(1.02);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-color: rgba(94,234,212,.45);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(94,234,212,.10);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.chip img{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width:26px; height:26px; border-radius:10px; object-fit:cover;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border:1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,.06);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.chip span{ font-size:12px; font-weight:700; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hint{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size:12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height:1.35;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footerRow{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display:flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items:center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content:space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap:10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top:auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding-top:6px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.count{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size:12px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.winnerGlow{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 0 0 2px rgba(94,234,212,.2), 0 18px 50px rgba(94,234,212,.15);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="wrap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Panel gauche: présence --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="panel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h1&gt;Présences&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;Coche au début de la réunion. Le tirage ne prend que les personnes présentes.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="actions"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;button id="allOn"&gt;Tout cocher&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;button id="allOff" class="danger"&gt;Tout décocher&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="list" id="list"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Panel droite: tirage --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="panel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h1&gt;Tirage au sort&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;Le bouton lance une animation puis s’arrête sur une personne au hasard (parmi les présents).&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="actions"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;button id="drawBtn" class="primary"&gt;Lancer 🎲&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;button id="resetBtn"&gt;Reset&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stage"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="big" id="winnerCard"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;img class="avatar" id="winnerImg" alt="" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="grow"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="name" id="winnerName"&gt;—&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="meta" id="winnerMeta"&gt;Prêt pour le tirage.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="ticker" id="ticker"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="footerRow"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="hint" id="hint"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Astuce : mets des photos carrées dans &lt;code&gt;photos/&lt;/code&gt;. Si une photo manque, ça affiche un avatar “neutre”.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="count" id="count"&gt;0 présent(s)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>// 1) CONFIG : mets ici ton équipe</p>
-<p class="p1"><span class="Apple-converted-space">  </span>// photo: chemin relatif (ex: "photos/alice.jpg")</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const PEOPLE = [</p>
-<p class="p1"><span class="Apple-converted-space">    </span>{ id: "alice", name: "Alice", role: "Chef de projet", photo: "photos/alice.jpg" },</p>
-<p class="p1"><span class="Apple-converted-space">    </span>{ id: "bob", <span class="Apple-converted-space">  </span>name: "Bob", <span class="Apple-converted-space">  </span>role: "Chef de projet", photo: "photos/bob.jpg" },</p>
-<p class="p1"><span class="Apple-converted-space">    </span>{ id: "carol", name: "Carol", role: "DA",<span class="Apple-converted-space">            </span>photo: "photos/carol.jpg" },</p>
-<p class="p1"><span class="Apple-converted-space">    </span>{ id: "david", name: "David", role: "Dev", <span class="Apple-converted-space">          </span>photo: "photos/david.jpg" },</p>
-<p class="p1"><span class="Apple-converted-space">  </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>// Avatar neutre (inline SVG, pas besoin de fichier)</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const FALLBACK_AVATAR =</p>
-<p class="p1"><span class="Apple-converted-space">    </span>"data:image/svg+xml;utf8," +</p>
-<p class="p1"><span class="Apple-converted-space">    </span>encodeURIComponent(`</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;defs&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;linearGradient id="g" x1="0" y1="0" x2="1" y2="1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;stop offset="0" stop-color="#243052"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;stop offset="1" stop-color="#141b33"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/linearGradient&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/defs&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;rect width="160" height="160" rx="28" fill="url(#g)"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;circle cx="80" cy="62" r="26" fill="rgba(255,255,255,0.22)"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;rect x="36" y="98" width="88" height="42" rx="21" fill="rgba(255,255,255,0.18)"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>`);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>// 2) ÉTAT</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const state = {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>present: new Map(), // id -&gt; boolean</p>
-<p class="p1"><span class="Apple-converted-space">    </span>isDrawing: false,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>lastWinnerId: null,</p>
-<p class="p1"><span class="Apple-converted-space">  </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>// 3) ELEMENTS</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const listEl = document.getElementById("list");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const tickerEl = document.getElementById("ticker");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const drawBtn = document.getElementById("drawBtn");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const resetBtn = document.getElementById("resetBtn");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const allOnBtn = document.getElementById("allOn");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const allOffBtn = document.getElementById("allOff");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const countEl = document.getElementById("count");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>const winnerCard = document.getElementById("winnerCard");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const winnerImg = document.getElementById("winnerImg");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const winnerName = document.getElementById("winnerName");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const winnerMeta = document.getElementById("winnerMeta");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>// 4) INIT</p>
-<p class="p1"><span class="Apple-converted-space">  </span>function init(){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// défaut : tout le monde présent</p>
-<p class="p1"><span class="Apple-converted-space">    </span>PEOPLE.forEach(p =&gt; state.present.set(p.id, true));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>renderList();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>renderTicker(getPresentPeople());</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateCount();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>setWinner(null);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function getPresentPeople(){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>return PEOPLE.filter(p =&gt; state.present.get(p.id));</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function updateCount(){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const n = getPresentPeople().length;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>countEl.textContent = `${n} présent(s)`;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>drawBtn.disabled = (n === 0) || state.isDrawing;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>allOnBtn.disabled = state.isDrawing;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>allOffBtn.disabled = state.isDrawing;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>resetBtn.disabled = state.isDrawing;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>// 5) UI RENDER</p>
-<p class="p1"><span class="Apple-converted-space">  </span>function renderList(){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>listEl.innerHTML = "";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>PEOPLE.forEach(p =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const row = document.createElement("div");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>row.className = "person";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const img = document.createElement("img");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>img.className = "avatar";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>img.alt = p.name;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>img.src = p.photo || FALLBACK_AVATAR;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>img.onerror = () =&gt; { img.src = FALLBACK_AVATAR; };</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const grow = document.createElement("div");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grow.className = "grow";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const name = document.createElement("div");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>name.className = "name";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>name.textContent = p.name;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const meta = document.createElement("div");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>meta.className = "meta";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>meta.textContent = p.role || "";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grow.appendChild(name);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grow.appendChild(meta);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const toggle = document.createElement("label");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>toggle.className = "toggle";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const cb = document.createElement("input");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cb.type = "checkbox";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cb.checked = !!state.present.get(p.id);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cb.addEventListener("change", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>state.present.set(p.id, cb.checked);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>renderTicker(getPresentPeople());</p>
-<p class="p1"><span class="Apple-converted-space">        </span>updateCount();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const t = document.createElement("span");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>t.textContent = cb.checked ? "présent" : "absent";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cb.addEventListener("change", () =&gt; t.textContent = cb.checked ? "présent" : "absent");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>toggle.appendChild(cb);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>toggle.appendChild(t);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>row.appendChild(img);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>row.appendChild(grow);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>row.appendChild(toggle);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>listEl.appendChild(row);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function renderTicker(pool){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>tickerEl.innerHTML = "";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// On duplique pour que l'animation ait "de la matière"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const items = [...pool, ...pool, ...pool].slice(0, Math.max(12, pool.length * 3));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>items.forEach((p, idx) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const chip = document.createElement("div");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>chip.className = "chip";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>chip.dataset.id = p.id;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>chip.dataset.idx = String(idx);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const img = document.createElement("img");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>img.alt = p.name;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>img.src = p.photo || FALLBACK_AVATAR;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>img.onerror = () =&gt; { img.src = FALLBACK_AVATAR; };</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const span = document.createElement("span");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>span.textContent = p.name;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>chip.appendChild(img);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>chip.appendChild(span);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tickerEl.appendChild(chip);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function setWinner(person){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>winnerCard.classList.remove("winnerGlow");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(!person){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>winnerImg.src = FALLBACK_AVATAR;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>winnerName.textContent = "—";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>winnerMeta.textContent = "Prêt pour le tirage.";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>winnerImg.src = person.photo || FALLBACK_AVATAR;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>winnerImg.onerror = () =&gt; { winnerImg.src = FALLBACK_AVATAR; };</p>
-<p class="p1"><span class="Apple-converted-space">    </span>winnerName.textContent = person.name;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>winnerMeta.textContent = person.role ? person.role : "Sélectionné·e";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>winnerCard.classList.add("winnerGlow");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>// 6) RANDOM DRAW</p>
-<p class="p1"><span class="Apple-converted-space">  </span>function pickRandom(pool){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// évite de retomber sur le dernier gagnant si possible</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(pool.length &lt;= 1) return pool[0] || null;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let p;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>for(let i=0; i&lt;10; i++){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>p = pool[Math.floor(Math.random() * pool.length)];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if(p.id !== state.lastWinnerId) break;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>return p;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>async function draw(){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const pool = getPresentPeople();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(pool.length === 0) return;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>state.isDrawing = true;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateCount();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// refresh ticker in case</p>
-<p class="p1"><span class="Apple-converted-space">    </span>renderTicker(pool);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// choisit gagnant</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const winner = pickRandom(pool);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>state.lastWinnerId = winner.id;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// animation: on "surbrille" des chips successifs</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const chips = Array.from(tickerEl.querySelectorAll(".chip"));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(chips.length === 0){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>setWinner(winner);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>state.isDrawing = false;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>updateCount();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// on veut s'arrêter sur un chip qui correspond au gagnant</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const targetIndexes = chips</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.map((c, i) =&gt; ({ c, i }))</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.filter(x =&gt; x.c.dataset.id === winner.id)</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.map(x =&gt; x.i);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const target = targetIndexes.length</p>
-<p class="p1"><span class="Apple-converted-space">      </span>? targetIndexes[targetIndexes.length - 1] // plutôt vers la fin pour un arrêt "naturel"</p>
-<p class="p1"><span class="Apple-converted-space">      </span>: Math.min(chips.length - 1, 8);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// "tours" complets avant l'arrêt</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const baseSpins = Math.min(28, chips.length - 1);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const finalStop = Math.min(chips.length - 1, baseSpins + target);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// on active successivement</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let delay = 35;<span class="Apple-converted-space">        </span>// départ rapide</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let delayGrowth = 1.08; // ralentissement</p>
-<p class="p1"><span class="Apple-converted-space">    </span>for(let i=0; i&lt;=finalStop; i++){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>chips.forEach(ch =&gt; ch.classList.remove("active"));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const current = chips[i % chips.length];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>current.classList.add("active");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>// scroll auto pour garder visible</p>
-<p class="p1"><span class="Apple-converted-space">      </span>current.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>await new Promise(r =&gt; setTimeout(r, delay));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>delay = Math.min(180, Math.floor(delay * delayGrowth));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// résultat</p>
-<p class="p1"><span class="Apple-converted-space">    </span>setWinner(winner);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>state.isDrawing = false;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateCount();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function setAll(val){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>PEOPLE.forEach(p =&gt; state.present.set(p.id, val));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>renderList();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>renderTicker(getPresentPeople());</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateCount();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function reset(){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>state.lastWinnerId = null;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>setWinner(null);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const chips = Array.from(tickerEl.querySelectorAll(".chip"));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>chips.forEach(ch =&gt; ch.classList.remove("active"));</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>// 7) EVENTS</p>
-<p class="p1"><span class="Apple-converted-space">  </span>drawBtn.addEventListener("click", draw);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>resetBtn.addEventListener("click", reset);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>allOnBtn.addEventListener("click", () =&gt; setAll(true));</p>
-<p class="p1"><span class="Apple-converted-space">  </span>allOffBtn.addEventListener("click", () =&gt; setAll(false));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>init();</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
-</body>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tirage au sort — Réunion du lundi</title>
+
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: #121a33;
+        --muted: #8ea0c6;
+        --text: #eaf0ff;
+        --accent: #5eead4;
+        --danger: #fb7185;
+        --border: rgba(255, 255, 255, 0.12);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: radial-gradient(1000px 500px at 20% 0%, rgba(94, 234, 212, 0.15), transparent 60%),
+          radial-gradient(800px 500px at 80% 10%, rgba(96, 165, 250, 0.15), transparent 60%), var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .wrap {
+        width: min(1100px, 100%);
+        display: grid;
+        grid-template-columns: 420px 1fr;
+        gap: 18px;
+      }
+
+      @media (max-width: 900px) {
+        .wrap {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .panel {
+        background: rgba(18, 26, 51, 0.85);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      header {
+        padding: 16px 16px 12px 16px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: 0.2px;
+      }
+
+      header p {
+        margin: 6px 0 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      button {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 0.06s ease, background 0.15s ease, border-color 0.15s ease;
+        user-select: none;
+        white-space: nowrap;
+      }
+
+      button:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+
+      button.primary {
+        background: rgba(94, 234, 212, 0.15);
+        border-color: rgba(94, 234, 212, 0.35);
+      }
+
+      button.primary:hover {
+        background: rgba(94, 234, 212, 0.22);
+      }
+
+      button.danger {
+        background: rgba(251, 113, 133, 0.12);
+        border-color: rgba(251, 113, 133, 0.35);
+      }
+
+      button.danger:hover {
+        background: rgba(251, 113, 133, 0.18);
+      }
+
+      button:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .content {
+        padding: 14px 16px 16px 16px;
+      }
+
+      .list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 62vh;
+        overflow: auto;
+        padding-right: 6px;
+      }
+
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        object-fit: cover;
+        background: rgba(255, 255, 255, 0.06);
+        flex: 0 0 auto;
+      }
+
+      .name {
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 1.1;
+      }
+
+      .meta {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+
+      .grow {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 0 0 auto;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--accent);
+        cursor: pointer;
+      }
+
+      .stage {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        min-height: 280px;
+      }
+
+      .big {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        padding: 14px;
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .big .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+      }
+
+      .big .name {
+        font-size: 18px;
+      }
+
+      .big .meta {
+        font-size: 12px;
+      }
+
+      .ticker {
+        display: flex;
+        gap: 10px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.04);
+        flex: 0 0 auto;
+        opacity: 0.65;
+        transform: scale(0.98);
+        transition: opacity 0.12s ease, transform 0.12s ease, border-color 0.12s ease;
+      }
+
+      .chip.active {
+        opacity: 1;
+        transform: scale(1.02);
+        border-color: rgba(94, 234, 212, 0.45);
+        background: rgba(94, 234, 212, 0.1);
+      }
+
+      .chip img {
+        width: 26px;
+        height: 26px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .chip span {
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .footerRow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 6px;
+      }
+
+      .count {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .winnerGlow {
+        box-shadow: 0 0 0 2px rgba(94, 234, 212, 0.2), 0 18px 50px rgba(94, 234, 212, 0.15);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <!-- Panel gauche: présence -->
+      <section class="panel">
+        <header>
+          <div>
+            <h1>Présences</h1>
+            <p>Coche au début de la réunion. Le tirage ne prend que les personnes présentes.</p>
+          </div>
+          <div class="actions">
+            <button id="allOn">Tout cocher</button>
+            <button id="allOff" class="danger">Tout décocher</button>
+          </div>
+        </header>
+        <div class="content">
+          <div class="list" id="list"></div>
+        </div>
+      </section>
+
+      <!-- Panel droite: tirage -->
+      <section class="panel">
+        <header>
+          <div>
+            <h1>Tirage au sort</h1>
+            <p>Le bouton lance une animation puis s’arrête sur une personne au hasard (parmi les présents).</p>
+          </div>
+          <div class="actions">
+            <button id="drawBtn" class="primary">Lancer 🎲</button>
+            <button id="resetBtn">Reset</button>
+          </div>
+        </header>
+
+        <div class="stage">
+          <div class="big" id="winnerCard">
+            <img class="avatar" id="winnerImg" alt="" />
+            <div class="grow">
+              <div class="name" id="winnerName">—</div>
+              <div class="meta" id="winnerMeta">Prêt pour le tirage.</div>
+            </div>
+          </div>
+
+          <div class="ticker" id="ticker"></div>
+
+          <div class="footerRow">
+            <div class="hint" id="hint">
+              Astuce : mets des photos carrées dans <code>photos/</code>. Si une photo manque, ça affiche un avatar “neutre”.
+            </div>
+            <div class="count" id="count">0 présent(s)</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // 1) CONFIG : mets ici ton équipe
+      // photo: chemin relatif (ex: "photos/alice.jpg")
+      const PEOPLE = [
+        { id: "alice", name: "Alice", role: "Chef de projet", photo: "photos/alice.jpg" },
+        { id: "bob", name: "Bob", role: "Chef de projet", photo: "photos/bob.jpg" },
+        { id: "carol", name: "Carol", role: "DA", photo: "photos/carol.jpg" },
+        { id: "david", name: "David", role: "Dev", photo: "photos/david.jpg" },
+      ];
+
+      // Avatar neutre (inline SVG, pas besoin de fichier)
+      const FALLBACK_AVATAR =
+        "data:image/svg+xml;utf8," +
+        encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#243052"/>
+                <stop offset="1" stop-color="#141b33"/>
+              </linearGradient>
+            </defs>
+            <rect width="160" height="160" rx="28" fill="url(#g)"/>
+            <circle cx="80" cy="62" r="26" fill="rgba(255,255,255,0.22)"/>
+            <rect x="36" y="98" width="88" height="42" rx="21" fill="rgba(255,255,255,0.18)"/>
+          </svg>
+        `);
+
+      // 2) ÉTAT
+      const state = {
+        present: new Map(), // id -> boolean
+        isDrawing: false,
+        lastWinnerId: null,
+      };
+
+      // 3) ELEMENTS
+      const listEl = document.getElementById("list");
+      const tickerEl = document.getElementById("ticker");
+      const drawBtn = document.getElementById("drawBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const allOnBtn = document.getElementById("allOn");
+      const allOffBtn = document.getElementById("allOff");
+      const countEl = document.getElementById("count");
+
+      const winnerCard = document.getElementById("winnerCard");
+      const winnerImg = document.getElementById("winnerImg");
+      const winnerName = document.getElementById("winnerName");
+      const winnerMeta = document.getElementById("winnerMeta");
+
+      // 4) INIT
+      function init() {
+        // défaut : tout le monde présent
+        PEOPLE.forEach((p) => state.present.set(p.id, true));
+        renderList();
+        renderTicker(getPresentPeople());
+        updateCount();
+        setWinner(null);
+      }
+
+      function getPresentPeople() {
+        return PEOPLE.filter((p) => state.present.get(p.id));
+      }
+
+      function updateCount() {
+        const n = getPresentPeople().length;
+        countEl.textContent = `${n} présent(s)`;
+        drawBtn.disabled = n === 0 || state.isDrawing;
+        allOnBtn.disabled = state.isDrawing;
+        allOffBtn.disabled = state.isDrawing;
+        resetBtn.disabled = state.isDrawing;
+      }
+
+      // 5) UI RENDER
+      function renderList() {
+        listEl.innerHTML = "";
+        PEOPLE.forEach((p) => {
+          const row = document.createElement("div");
+          row.className = "person";
+
+          const img = document.createElement("img");
+          img.className = "avatar";
+          img.alt = p.name;
+          img.src = p.photo || FALLBACK_AVATAR;
+          img.onerror = () => {
+            img.src = FALLBACK_AVATAR;
+          };
+
+          const grow = document.createElement("div");
+          grow.className = "grow";
+
+          const name = document.createElement("div");
+          name.className = "name";
+          name.textContent = p.name;
+
+          const meta = document.createElement("div");
+          meta.className = "meta";
+          meta.textContent = p.role || "";
+
+          grow.appendChild(name);
+          grow.appendChild(meta);
+
+          const toggle = document.createElement("label");
+          toggle.className = "toggle";
+
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.checked = !!state.present.get(p.id);
+          cb.addEventListener("change", () => {
+            state.present.set(p.id, cb.checked);
+            renderTicker(getPresentPeople());
+            updateCount();
+          });
+
+          const t = document.createElement("span");
+          t.textContent = cb.checked ? "présent" : "absent";
+          cb.addEventListener("change", () => {
+            t.textContent = cb.checked ? "présent" : "absent";
+          });
+
+          toggle.appendChild(cb);
+          toggle.appendChild(t);
+
+          row.appendChild(img);
+          row.appendChild(grow);
+          row.appendChild(toggle);
+
+          listEl.appendChild(row);
+        });
+      }
+
+      function renderTicker(pool) {
+        tickerEl.innerHTML = "";
+        // On duplique pour que l'animation ait "de la matière"
+        const items = [...pool, ...pool, ...pool].slice(0, Math.max(12, pool.length * 3));
+        items.forEach((p, idx) => {
+          const chip = document.createElement("div");
+          chip.className = "chip";
+          chip.dataset.id = p.id;
+          chip.dataset.idx = String(idx);
+
+          const img = document.createElement("img");
+          img.alt = p.name;
+          img.src = p.photo || FALLBACK_AVATAR;
+          img.onerror = () => {
+            img.src = FALLBACK_AVATAR;
+          };
+
+          const span = document.createElement("span");
+          span.textContent = p.name;
+
+          chip.appendChild(img);
+          chip.appendChild(span);
+          tickerEl.appendChild(chip);
+        });
+      }
+
+      function setWinner(person) {
+        winnerCard.classList.remove("winnerGlow");
+
+        if (!person) {
+          winnerImg.src = FALLBACK_AVATAR;
+          winnerName.textContent = "—";
+          winnerMeta.textContent = "Prêt pour le tirage.";
+          return;
+        }
+
+        winnerImg.src = person.photo || FALLBACK_AVATAR;
+        winnerImg.onerror = () => {
+          winnerImg.src = FALLBACK_AVATAR;
+        };
+        winnerName.textContent = person.name;
+        winnerMeta.textContent = person.role ? person.role : "Sélectionné·e";
+        winnerCard.classList.add("winnerGlow");
+      }
+
+      // 6) RANDOM DRAW
+      function pickRandom(pool) {
+        // évite de retomber sur le dernier gagnant si possible
+        if (pool.length <= 1) return pool[0] || null;
+
+        let p;
+        for (let i = 0; i < 10; i++) {
+          p = pool[Math.floor(Math.random() * pool.length)];
+          if (p.id !== state.lastWinnerId) break;
+        }
+        return p;
+      }
+
+      async function draw() {
+        const pool = getPresentPeople();
+        if (pool.length === 0) return;
+
+        state.isDrawing = true;
+        updateCount();
+
+        // refresh ticker in case
+        renderTicker(pool);
+
+        // choisit gagnant
+        const winner = pickRandom(pool);
+        state.lastWinnerId = winner.id;
+
+        // animation: on "surbrille" des chips successifs
+        const chips = Array.from(tickerEl.querySelectorAll(".chip"));
+        if (chips.length === 0) {
+          setWinner(winner);
+          state.isDrawing = false;
+          updateCount();
+          return;
+        }
+
+        // on veut s'arrêter sur un chip qui correspond au gagnant
+        const targetIndexes = chips
+          .map((c, i) => ({ c, i }))
+          .filter((x) => x.c.dataset.id === winner.id)
+          .map((x) => x.i);
+
+        const target = targetIndexes.length ? targetIndexes[targetIndexes.length - 1] : Math.min(chips.length - 1, 8);
+
+        // "tours" complets avant l'arrêt
+        const baseSpins = Math.min(28, chips.length - 1);
+        const finalStop = Math.min(chips.length - 1, baseSpins + target);
+
+        // on active successivement
+        let delay = 35; // départ rapide
+        let delayGrowth = 1.08; // ralentissement
+
+        for (let i = 0; i <= finalStop; i++) {
+          chips.forEach((ch) => ch.classList.remove("active"));
+          const current = chips[i % chips.length];
+          current.classList.add("active");
+
+          // scroll auto pour garder visible
+          current.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+
+          await new Promise((r) => setTimeout(r, delay));
+          delay = Math.min(180, Math.floor(delay * delayGrowth));
+        }
+
+        // résultat
+        setWinner(winner);
+
+        state.isDrawing = false;
+        updateCount();
+      }
+
+      function setAll(val) {
+        PEOPLE.forEach((p) => state.present.set(p.id, val));
+        renderList();
+        renderTicker(getPresentPeople());
+        updateCount();
+      }
+
+      function reset() {
+        state.lastWinnerId = null;
+        setWinner(null);
+        const chips = Array.from(tickerEl.querySelectorAll(".chip"));
+        chips.forEach((ch) => ch.classList.remove("active"));
+      }
+
+      // 7) EVENTS
+      drawBtn.addEventListener("click", draw);
+      resetBtn.addEventListener("click", reset);
+      allOnBtn.addEventListener("click", () => setAll(true));
+      allOffBtn.addEventListener("click", () => setAll(false));
+
+      init();
+    </script>
+  </body>
+</html>
