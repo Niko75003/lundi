@@ -504,31 +504,31 @@
         });
       }
 
-      function renderTicker(pool) {
-        tickerEl.innerHTML = "";
-        // On duplique pour que l'animation ait "de la matière"
-        const items = [...pool, ...pool, ...pool].slice(0, Math.max(12, pool.length * 3));
-        items.forEach((p, idx) => {
-          const chip = document.createElement("div");
-          chip.className = "chip";
-          chip.dataset.id = p.id;
-          chip.dataset.idx = String(idx);
+    function renderTicker(pool) {
+    tickerEl.innerHTML = "";
 
-          const img = document.createElement("img");
-          img.alt = p.name;
-          img.src = p.photo || FALLBACK_AVATAR;
-          img.onerror = () => {
-            img.src = FALLBACK_AVATAR;
-          };
+    pool.forEach((p, idx) => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.dataset.id = p.id;
+    chip.dataset.idx = String(idx);
 
-          const span = document.createElement("span");
-          span.textContent = p.name;
+    const img = document.createElement("img");
+    img.alt = p.name;
+    img.src = p.photo || FALLBACK_AVATAR;
+    img.onerror = () => {
+      img.src = FALLBACK_AVATAR;
+    };
 
-          chip.appendChild(img);
-          chip.appendChild(span);
-          tickerEl.appendChild(chip);
-        });
-      }
+    const span = document.createElement("span");
+    span.textContent = p.name;
+
+    chip.appendChild(img);
+    chip.appendChild(span);
+    tickerEl.appendChild(chip);
+  });
+}
+
 
       function setWinner(person) {
         winnerCard.classList.remove("winnerGlow");
@@ -562,72 +562,70 @@
         return p;
       }
 
-      async function draw() {
-        const pool = getPresentPeople();
-        if (pool.length === 0) return;
+     async function draw() {
+  const pool = getPresentPeople();
+  if (pool.length === 0) return;
 
-        state.isDrawing = true;
-        updateCount();
+  state.isDrawing = true;
+  updateCount();
 
-        // refresh ticker in case
-        renderTicker(pool);
+  // Re-génère le ticker (sans doublons) à partir des présents
+  renderTicker(pool);
 
-        // choisit gagnant
-        const winner = pickRandom(pool);
-        state.lastWinnerId = winner.id;
+  // Choisit le gagnant (tirage équitable, 1 occurrence par personne)
+  const winner = pickRandom(pool);
+  state.lastWinnerId = winner.id;
 
-        // animation: on "surbrille" des chips successifs
-        const chips = Array.from(tickerEl.querySelectorAll(".chip"));
-        if (chips.length === 0) {
-          setWinner(winner);
-          state.isDrawing = false;
-          updateCount();
-          return;
-        }
+  // Animation circulaire: on surbrille les chips en boucle jusqu'au gagnant
+  const chips = Array.from(tickerEl.querySelectorAll(".chip"));
+  if (chips.length === 0) {
+    setWinner(winner);
+    state.isDrawing = false;
+    updateCount();
+    return;
+  }
 
-        // on veut s'arrêter sur un chip qui correspond au gagnant
-        const targetIndexes = chips
-          .map((c, i) => ({ c, i }))
-          .filter((x) => x.c.dataset.id === winner.id)
-          .map((x) => x.i);
+  const winnerIndex = pool.findIndex((p) => p.id === winner.id);
 
-        const target = targetIndexes.length ? targetIndexes[targetIndexes.length - 1] : Math.min(chips.length - 1, 8);
+  // Réglage ~1 seconde pour ~18 personnes
+  const fullCycles = 1;   // 1 tour complet
+  let delay = 18;         // départ rapide
+  let delayGrowth = 1.06; // ralentissement léger
+  const maxDelay = 55;    // évite une fin trop lente
 
-        // "tours" complets avant l'arrêt
-        const baseSpins = Math.min(6, chips.length - 1);
-        const finalStop = Math.min(chips.length - 1, baseSpins + target);
+  const totalSteps = fullCycles * chips.length + winnerIndex;
 
-        // on active successivement
-        let delay = 20; // départ rapide
-        let delayGrowth = 1.20; // ralentissement
+  for (let step = 0; step <= totalSteps; step++) {
+    chips.forEach((ch) => ch.classList.remove("active"));
 
-        for (let i = 0; i <= finalStop; i++) {
-          chips.forEach((ch) => ch.classList.remove("active"));
-          const current = chips[i % chips.length];
-          current.classList.add("active");
+    const idx = step % chips.length;
+    const current = chips[idx];
+    current.classList.add("active");
 
-          // scroll auto pour garder visible
-          current.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    // garde la chip visible si le ticker déborde
+    current.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
 
-          await new Promise((r) => setTimeout(r, delay));
-          delay = Math.min(100, Math.floor(delay * delayGrowth));
-        }
+    await new Promise((r) => setTimeout(r, delay));
+    delay = Math.min(maxDelay, Math.floor(delay * delayGrowth));
+  }
 
-        // résultat
-        setWinner(winner);
-        
-        // Force la surbrillance sur la chip du gagnant (pour éviter tout décalage visuel)
-        chips.forEach((ch) => ch.classList.remove("active"));
-        const winnerChip = chips.find((ch) => ch.dataset.id === winner.id);
-        if (winnerChip) {
-          winnerChip.classList.add("active");
-          winnerChip.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      }
+  // Sécurise la cohérence visuelle: la chip active est bien celle du gagnant
+  chips.forEach((ch) => ch.classList.remove("active"));
+  const winnerChip = chips.find((ch) => ch.dataset.id === winner.id);
+  if (winnerChip) {
+    winnerChip.classList.add("active");
+    winnerChip.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }
 
-        state.isDrawing = false;
-        updateCount();
-      }
+  // Affiche le gagnant dans la carte du haut
+  setWinner(winner);
 
+  state.isDrawing = false;
+  updateCount();
+}
+
+
+       
       function setAll(val) {
         PEOPLE.forEach((p) => state.present.set(p.id, val));
         renderList();
